@@ -109,16 +109,9 @@ open class SNFilter: UIImageView {
         
         var finalFilters = [SNFilter]()
         
-        _ = DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.high)
-        let syncQueue = DispatchQueue(label: "com.snapsliderfilters.app", attributes: .concurrent)
-        
-        // Each filter can be generated on a different thread
-        DispatchQueue.concurrentPerform(iterations: filters.count) { iteration in
-            let filterComputed = originalImage.applyFilter(filterNamed: filters[iteration])
-            syncQueue.sync {
-                finalFilters.append(filterComputed)
-                return
-            }
+        for filter in filters {
+            let filterComputed = originalImage.applyFilter(filterNamed: filter)
+            finalFilters.append(filterComputed)
         }
         
         return finalFilters
@@ -132,7 +125,7 @@ extension SNFilter: NSCopying {
     public func copy(with zone: NSZone?) -> Any {
         guard
             let image = image
-            else { fatalError("It seems that image is in fact mandatory") }
+        else { fatalError("It seems that image is in fact mandatory") }
         
         let copy = SNFilter(frame: frame, withImage: image, withContentMode: contentMode)
         copy.backgroundColor = self.backgroundColor
