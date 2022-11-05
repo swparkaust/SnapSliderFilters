@@ -8,7 +8,7 @@
 
 import UIKit
 
-public protocol SNSliderDataSource : class {
+public protocol SNSliderDataSource : AnyObject {
     
     func numberOfSlides(_ slider: SNSlider) -> Int
     

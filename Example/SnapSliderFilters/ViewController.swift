@@ -67,9 +67,9 @@ class ViewController: UIViewController {
         self.tapGesture.delegate = self
         self.slider.addGestureRecognizer(tapGesture)
         
-        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardTypeChanged(_:)), name: NSNotification.Name.UIKeyboardDidShow, object: nil)
+        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self.textField, selector: #selector(SNTextField.keyboardTypeChanged(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
     }
     
     fileprivate func setupButtonSave() {
@@ -137,7 +137,7 @@ extension ViewController: SNSliderDataSource {
 
 extension ViewController: UIGestureRecognizerDelegate {
     
-    func handleTap() {
+    @objc func handleTap() {
         self.textField.handleTap()
     }
 }
@@ -146,9 +146,9 @@ extension ViewController: UIGestureRecognizerDelegate {
 
 extension ViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             
             // To avoid too big images and orientation issue
             let newImage = pickedImage.resizeWithWidth(SNUtils.screenSize.width)
