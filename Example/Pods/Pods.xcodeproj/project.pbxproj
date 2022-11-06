@@ -118,7 +118,8 @@
 			children = (
 				5A81F4AA8DE7305BC6B51A9DC4731941 /* Classes */,
 			);
-			path = SnapSliderFilters;
+			name = SnapSliderFilters;
+			path = Sources/SnapSliderFilters;
 			sourceTree = "<group>";
 		};
 		4C8FFF7154916914E2EB04872C9F7F98 /* Development Pods */ = {

@@ -8,7 +8,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "SnapSliderFilters"
-  s.version          = "1.1"
+  s.version          = "3.0"
   s.summary          = "Snapchat-like filters, slider, stickers, textfield and buttons !"
 
 # This description is used to generate tags and improve search results.
@@ -30,7 +30,7 @@ SnapSliderFilters allows you to easily create a SnapChat like navigation between
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'SnapSliderFilters/Classes/**/*'
+  s.source_files = 'Sources/SnapSliderFilters/Classes/**/*'
   
   # s.resource_bundles = {
   #   'SnapSliderFilters' => ['SnapSliderFilters/Assets/*.png']
